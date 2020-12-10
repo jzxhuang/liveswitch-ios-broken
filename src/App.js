@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import BrokenExample from "./components/BrokenExample";
+import WorkingExample from "./components/WorkingExample";
+import WorkingLiveSwitch from "./components/WorkingLiveSwitch";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <h1>LiveSwitch Not Working w/ iOS Safari</h1>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/broken-example">Broken Example (LiveSwitch)</Link>
+            </li>
+            <li>
+              <Link to="/working-example">
+                Working Example (Native Browser API)
+              </Link>
+            </li>
+            <li>
+              <Link to="/working-example-liveswitch">
+                Working Example (LiveSwitch, with DomContentLayout (not ideal))
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Switch>
+          <Route path="/broken-example">
+            <BrokenExample />
+          </Route>
+          <Route path="/working-example">
+            <WorkingExample />
+          </Route>
+          <Route path="/working-example-liveswitch">
+            <WorkingLiveSwitch />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
